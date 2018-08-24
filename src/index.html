@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DTTRACE-SDK-TEST</title>
+</head>
+<body>
+<h4>第一种方式</h4><!-- href="javascript:;"    href="https://www.dtstack.com/"   -->
+<a class="dttrace"  data-dttrace-eventid="1" data-dttrace-triggertype="action"   href="https://www.baidu.com/">袋鼠云</a>
+<br>
+<br>
+<br>
+<img alt="我是大白" src="./img/timg.jpeg" width="150px" height="250px" class="dttrace" data-dttrace-eventid="2103" data-dttrace-triggertype="action">
+<form  action="" >
+	<table align="center" border="1">
+		<tr>
+		     <td> 请输入姓名:</td><td><input name="aaa" class="dttrace" data-dttrace-eventid="1004" data-dttrace-triggertype="action"/></td>
+	    </tr>
+		<tr>
+		     <td><button id ="submit" type="submit" class="dttrace" data-dttrace-eventid="2101" data-dttrace-triggertype="action">提交</button></td>
+		     <td><button type="reset"  class="dttrace" data-dttrace-eventid="2102" data-dttrace-triggertype="action">重置</button></td>
+		</tr>
+	</table>
+</form>
+
+
+
+
+
+
+<h4>第二种方式</h4>
+<button id="btn1"  name="haya">点击我</button>
+<h4>第三种方式</h4>
+<button id="btn2">再点击我</button>
+<div id="testcookieget"></div>
+<script src="dttrace.js"></script>
+<script>
+/*   Dttrace.init({
+    //  appKey:'71704164',
+   // appKey:'',
+   // 为null
+      appKey:'9999999',
+   // appKey:'999999999',
+   // appKey:0,
+  //  appKey:'',
+    sessionExpiration:60*1000,
+    serverUrl:'http://172.16.10.89:7001/',
+    params:{
+        "realName":"隔壁老王",
+        "role":["一级管理员","二级管理员"]
+    }
+  }); */
+
+  Dttrace.init({
+    appKey:'57951665',
+    getSessionId: function(){
+        return Dttrace.cookie.get('SESSIONID')
+    }, 
+    serverUrl:'http://172.16.10.89:7001/',
+    params:{
+        "sex":"man",
+        "$session_id":"aaaaaabbbbbbbbaabababababbabababa",
+        "$userid":"mufeng_rrrrrrrrrrrrrrr"
+    },
+    debug:true
+  });
+  
+  
+  var btn1=document.getElementById("btn1");
+  var btn2=document.getElementById("btn2");
+  var btnsub = document.getElementById("submit");
+  var cookiegetdom=document.getElementById("testcookieget");
+  
+  cookiegetdom.innerHTML=Dttrace.cookie.get("realName");
+
+  btn1.onclick=Dttrace.carryRocket(2101,function(e) {
+    alert(this.innerHTML);
+    return {
+    	 $trigger_type:'action_btn11' 
+    }
+  },{
+    /* $trigger_type:'action_btn1' */
+  });
+
+  btn2.onclick=function(e) {
+    Dttrace.launchRocket(3002,{
+      $trigger_type:'action_btn2'
+    });
+    alert(this.innerHTML);
+    Dttrace.cookie.set("realName","袋鼠宝宝",60*1000,true,false); 
+    alert(Dttrace.cookie.get("realName"));
+
+  };
+  
+ 
+	btnsub.onclick = function(e) {
+		Dttrace.launchRocket(3008, {
+			$trigger_type : 'btnsub',
+		});
+		alert(this.innerHTML);
+	};
+</script>
+</body>
+</html>

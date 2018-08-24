@@ -1,0 +1,20 @@
+{
+  "name": "test-dttrace-js-sdk",
+  "version": "1.0.0",
+  "description": "from swordsman  changqing",
+  "scripts": {
+    "start": "pushstate-server ./src 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruichengping/test-dttrace-js-sdk.git"
+  },
+  "author": "changqing",
+  "bugs": {
+    "url": "https://github.com/ruichengping/test-dttrace-js-sdk/issues"
+  },
+  "homepage": "https://github.com/ruichengping/test-dttrace-js-sdk#readme",
+  "devDependencies": {
+    "pushstate-server": "^3.0.1"
+  }
+}
